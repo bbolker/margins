@@ -148,36 +148,19 @@ The package also implement's one of the best features of `margins`, which is the
 ```r
 # webuse margex
 library("webuse")
-```
-
-```
-## Error in library("webuse"): there is no package called 'webuse'
-```
-
-```r
 webuse::webuse("margex")
-```
-
-```
-## Error in loadNamespace(x): there is no package called 'webuse'
-```
-
-```r
 # logistic outcome treatment##group age c.age#c.age treatment#c.age
 mod2 <- glm(outcome ~ treatment * group + age + I(age^2) * treatment, data = margex, family = binomial)
-```
 
-```
-## Error in eval(mf, parent.frame()): object 'margex' not found
-```
-
-```r
 # margins, dydx(*)
 summary(margins(mod2))
 ```
 
 ```
-## Error in eval(expr, envir, enclos): object 'mod2' not found
+##     factor     AME     SE       z      p   lower   upper
+##        age  0.0096 0.0008 12.3763 0.0000  0.0081  0.0112
+##      group -0.0479 0.0129 -3.7044 0.0002 -0.0733 -0.0226
+##  treatment  0.0432 0.0147  2.9321 0.0034  0.0143  0.0720
 ```
 
 ```r
@@ -186,7 +169,12 @@ summary(margins(mod2, at = list(age = c(20, 30, 40, 50, 60)), variables = "treat
 ```
 
 ```
-## Error in eval(expr, envir, enclos): object 'mod2' not found
+##     factor     age     AME     SE       z      p   lower  upper
+##  treatment 20.0000 -0.0009 0.0043 -0.2061 0.8367 -0.0093 0.0075
+##  treatment 30.0000  0.0034 0.0107  0.3200 0.7490 -0.0176 0.0245
+##  treatment 40.0000  0.0301 0.0170  1.7736 0.0761 -0.0032 0.0634
+##  treatment 50.0000  0.0990 0.0217  4.5666 0.0000  0.0565 0.1415
+##  treatment 60.0000  0.1896 0.0384  4.9339 0.0000  0.1143 0.2649
 ```
 
 This functionality removes the need to modify data before performing such calculations, which can be quite unwieldy when many specifications are desired.
@@ -200,7 +188,10 @@ summary(margins(mod2, data = subset(margex, sex == 0)))
 ```
 
 ```
-## Error in eval(expr, envir, enclos): object 'mod2' not found
+##     factor     AME     SE       z      p   lower   upper
+##        age  0.0043 0.0007  5.7723 0.0000  0.0028  0.0057
+##      group -0.0753 0.0105 -7.1745 0.0000 -0.0959 -0.0547
+##  treatment  0.0381 0.0070  5.4618 0.0000  0.0244  0.0517
 ```
 
 ```r
@@ -209,7 +200,10 @@ summary(margins(mod2, data = subset(margex, sex == 1)))
 ```
 
 ```
-## Error in eval(expr, envir, enclos): object 'mod2' not found
+##     factor     AME     SE       z      p   lower  upper
+##        age  0.0150 0.0013 11.5578 0.0000  0.0125 0.0176
+##      group -0.0206 0.0236 -0.8742 0.3820 -0.0669 0.0256
+##  treatment  0.0482 0.0231  2.0910 0.0365  0.0030 0.0934
 ```
 
 
@@ -227,43 +221,23 @@ Using the `plot()` method yields an aesthetically similar result to Stata's `mar
 
 ```r
 library("webuse")
-```
-
-```
-## Error in library("webuse"): there is no package called 'webuse'
-```
-
-```r
 webuse::webuse("nhanes2")
-```
-
-```
-## Error in loadNamespace(x): there is no package called 'webuse'
-```
-
-```r
 mod3 <- glm(highbp ~ sex * agegrp * bmi, data = nhanes2, family = binomial)
-```
-
-```
-## Error in eval(mf, parent.frame()): object 'nhanes2' not found
-```
-
-```r
 summary(marg3 <- margins(mod3))
 ```
 
 ```
-## Error in eval(expr, envir, enclos): object 'mod3' not found
+##  factor     AME     SE        z      p   lower   upper
+##  agegrp  0.0846 0.0021  39.4392 0.0000  0.0804  0.0888
+##     bmi  0.0261 0.0009  28.4995 0.0000  0.0243  0.0279
+##     sex -0.0911 0.0085 -10.7063 0.0000 -0.1077 -0.0744
 ```
 
 ```r
 plot(marg3)
 ```
 
-```
-## Error in eval(expr, envir, enclos): object 'marg3' not found
-```
+![plot of chunk marginsplot](https://i.imgur.com/Q5tuYGC.png)
 
 In addition to the estimation procedures and `plot()` generic, **margins** offers several plotting methods for model objects. First, there is a new generic `cplot()` that displays predictions or marginal effects (from an "lm" or "glm" model) of a variable conditional across values of third variable (or itself). For example, here is a graph of predicted probabilities from a logit model:
 
@@ -273,7 +247,7 @@ mod4 <- glm(am ~ wt*drat, data = mtcars, family = binomial)
 cplot(mod4, x = "wt", se.type = "shade")
 ```
 
-![plot of chunk cplot1](https://i.imgur.com/E2hyOMh.png)
+![plot of chunk cplot1](https://i.imgur.com/Xb7WRJi.png)
 
 And fitted values with a factor independent variable:
 
@@ -282,7 +256,7 @@ And fitted values with a factor independent variable:
 cplot(lm(Sepal.Length ~ Species, data = iris))
 ```
 
-![plot of chunk cplot2](https://i.imgur.com/91Wz84U.png)
+![plot of chunk cplot2](https://i.imgur.com/6EG85jx.png)
 
 and a graph of the effect of `drat` across levels of `wt`:
 
@@ -291,7 +265,7 @@ and a graph of the effect of `drat` across levels of `wt`:
 cplot(mod4, x = "wt", dx = "drat", what = "effect", se.type = "shade")
 ```
 
-![plot of chunk cplot3](https://i.imgur.com/0KWdMKv.png)
+![plot of chunk cplot3](https://i.imgur.com/9dABYTl.png)
 
 `cplot()` also returns a data frame of values, so that it can be used just for calculating quantities of interest before plotting them with another graphics package, such as **ggplot2**:
 
@@ -322,7 +296,7 @@ ggplot(dat, aes(x = xvals)) +
   theme_bw()
 ```
 
-![plot of chunk cplot_ggplot2](https://i.imgur.com/O9Bw8FD.png)
+![plot of chunk cplot_ggplot2](https://i.imgur.com/PYvzDyp.png)
 
 Second, the package implements methods for "lm" and "glm" class objects for the `persp()` generic plotting function. This enables three-dimensional representations of predicted outcomes:
 
@@ -331,7 +305,7 @@ Second, the package implements methods for "lm" and "glm" class objects for the 
 persp(mod1, xvar = "cyl", yvar = "hp")
 ```
 
-![plot of chunk persp1](https://i.imgur.com/Y2QEvxt.png)
+![plot of chunk persp1](https://i.imgur.com/XwhasdO.png)
 
 and marginal effects:
 
@@ -340,7 +314,7 @@ and marginal effects:
 persp(mod1, xvar = "cyl", yvar = "hp", what = "effect", nx = 10)
 ```
 
-![plot of chunk persp2](https://i.imgur.com/QCqecrO.png)
+![plot of chunk persp2](https://i.imgur.com/iEsFgKt.png)
 
 And if three-dimensional plots aren't your thing, there are also analogous methods for the `image()` generic, to produce heatmap-style representations:
 
@@ -349,7 +323,7 @@ And if three-dimensional plots aren't your thing, there are also analogous metho
 image(mod1, xvar = "cyl", yvar = "hp", main = "Predicted Fuel Efficiency,\nby Cylinders and Horsepower")
 ```
 
-![plot of chunk image11](https://i.imgur.com/Gg5IMrV.png)
+![plot of chunk image11](https://i.imgur.com/xJ0td3I.png)
 
 The numerous package vignettes and help files contain extensive documentation and examples of all package functionality.
 
@@ -366,7 +340,7 @@ microbenchmark(marginal_effects(mod1))
 ```
 ## Unit: milliseconds
 ##                    expr      min       lq     mean   median       uq      max neval
-##  marginal_effects(mod1) 2.219172 2.321284 2.588372 2.392883 2.525417 5.871072   100
+##  marginal_effects(mod1) 2.256082 2.274596 2.414173 2.283578 2.304247 10.75537   100
 ```
 
 ```r
@@ -375,8 +349,8 @@ microbenchmark(margins(mod1))
 
 ```
 ## Unit: milliseconds
-##           expr      min       lq     mean   median       uq      max neval
-##  margins(mod1) 16.34965 16.62798 17.41705 16.90862 17.23319 24.19629   100
+##           expr      min      lq     mean   median       uq      max neval
+##  margins(mod1) 16.62163 16.8786 17.80402 17.20959 17.67329 24.95876   100
 ```
 
 The most computationally expensive part of `margins()` is variance estimation. If you don't need variances, use `marginal_effects()` directly or specify `margins(..., vce = "none")`.
