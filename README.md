@@ -273,7 +273,7 @@ mod4 <- glm(am ~ wt*drat, data = mtcars, family = binomial)
 cplot(mod4, x = "wt", se.type = "shade")
 ```
 
-![plot of chunk cplot1](https://i.imgur.com/xWKzXnT.png)
+![plot of chunk cplot1](https://i.imgur.com/E2hyOMh.png)
 
 And fitted values with a factor independent variable:
 
@@ -282,7 +282,7 @@ And fitted values with a factor independent variable:
 cplot(lm(Sepal.Length ~ Species, data = iris))
 ```
 
-![plot of chunk cplot2](https://i.imgur.com/xmwfk86.png)
+![plot of chunk cplot2](https://i.imgur.com/91Wz84U.png)
 
 and a graph of the effect of `drat` across levels of `wt`:
 
@@ -291,7 +291,7 @@ and a graph of the effect of `drat` across levels of `wt`:
 cplot(mod4, x = "wt", dx = "drat", what = "effect", se.type = "shade")
 ```
 
-![plot of chunk cplot3](https://i.imgur.com/un1Tj2N.png)
+![plot of chunk cplot3](https://i.imgur.com/0KWdMKv.png)
 
 `cplot()` also returns a data frame of values, so that it can be used just for calculating quantities of interest before plotting them with another graphics package, such as **ggplot2**:
 
@@ -322,7 +322,7 @@ ggplot(dat, aes(x = xvals)) +
   theme_bw()
 ```
 
-![plot of chunk cplot_ggplot2](https://i.imgur.com/Egw7LQO.png)
+![plot of chunk cplot_ggplot2](https://i.imgur.com/O9Bw8FD.png)
 
 Second, the package implements methods for "lm" and "glm" class objects for the `persp()` generic plotting function. This enables three-dimensional representations of predicted outcomes:
 
@@ -331,7 +331,7 @@ Second, the package implements methods for "lm" and "glm" class objects for the 
 persp(mod1, xvar = "cyl", yvar = "hp")
 ```
 
-![plot of chunk persp1](https://i.imgur.com/wATZ6zy.png)
+![plot of chunk persp1](https://i.imgur.com/Y2QEvxt.png)
 
 and marginal effects:
 
@@ -340,7 +340,7 @@ and marginal effects:
 persp(mod1, xvar = "cyl", yvar = "hp", what = "effect", nx = 10)
 ```
 
-![plot of chunk persp2](https://i.imgur.com/xSCsWFb.png)
+![plot of chunk persp2](https://i.imgur.com/QCqecrO.png)
 
 And if three-dimensional plots aren't your thing, there are also analogous methods for the `image()` generic, to produce heatmap-style representations:
 
@@ -349,7 +349,7 @@ And if three-dimensional plots aren't your thing, there are also analogous metho
 image(mod1, xvar = "cyl", yvar = "hp", main = "Predicted Fuel Efficiency,\nby Cylinders and Horsepower")
 ```
 
-![plot of chunk image11](https://i.imgur.com/bQXhn5P.png)
+![plot of chunk image11](https://i.imgur.com/Gg5IMrV.png)
 
 The numerous package vignettes and help files contain extensive documentation and examples of all package functionality.
 
@@ -366,7 +366,7 @@ microbenchmark(marginal_effects(mod1))
 ```
 ## Unit: milliseconds
 ##                    expr      min       lq     mean   median       uq      max neval
-##  marginal_effects(mod1) 2.218391 2.261667 2.543713 2.338672 2.519786 5.670947   100
+##  marginal_effects(mod1) 2.219172 2.321284 2.588372 2.392883 2.525417 5.871072   100
 ```
 
 ```r
@@ -376,7 +376,7 @@ microbenchmark(margins(mod1))
 ```
 ## Unit: milliseconds
 ##           expr      min       lq     mean   median       uq      max neval
-##  margins(mod1) 16.35161 16.50211 17.29277 16.71006 17.06778 23.76726   100
+##  margins(mod1) 16.34965 16.62798 17.41705 16.90862 17.23319 24.19629   100
 ```
 
 The most computationally expensive part of `margins()` is variance estimation. If you don't need variances, use `marginal_effects()` directly or specify `margins(..., vce = "none")`.
@@ -386,7 +386,7 @@ The most computationally expensive part of `margins()` is variance estimation. I
 
 [![CRAN](http://www.r-pkg.org/badges/version/margins)](https://cran.r-project.org/package=margins)
 ![Downloads](http://cranlogs.r-pkg.org/badges/margins)
-[![Build Status](https://app.travis-ci.org/leeper/margins.svg?branch=master)](https://app.travis-ci.org/leeper/margins)
+<!-- [![Build Status](https://app.travis-ci.org/leeper/margins.svg?branch=master)](https://app.travis-ci.org/leeper/margins) -->
 [![Build status](https://ci.appveyor.com/api/projects/status/t6nxndmvvcw3gw7f/branch/master?svg=true)](https://ci.appveyor.com/project/leeper/margins/branch/master)
 [![codecov.io](http://app.codecov.io/github/leeper/margins/coverage.svg?branch=master)](https://app.codecov.io/github/leeper/margins?branch=master)
 [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/)
