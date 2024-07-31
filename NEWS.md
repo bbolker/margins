@@ -1,3 +1,7 @@
+## margins 0.3.28
+
+* CRAN issues only (documentation, vignette support)
+
 ## margins 0.3.27
 
 * version bump and resubmission to recover from `prediction` archive cascade
