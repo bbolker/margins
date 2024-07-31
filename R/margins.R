@@ -1,6 +1,5 @@
 #' @rdname margins
 #' @name margins
-#' @aliases margins-package
 #' @docType package
 #' @title Marginal Effects Estimation
 #' @description This package is an R port of Stata's \samp{margins} command, implemented as an S3 generic \code{margins()} for model objects, like those of class \dQuote{lm} and \dQuote{glm}. \code{margins()} is an S3 generic function for building a \dQuote{margins} object from a model object. Methods are currently implemented for several model classes (see Details, below).
