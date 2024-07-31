@@ -5,7 +5,6 @@
 %   R/margins_nnet.R, R/margins_polr.R, R/margins_summary.R, R/margins_svyglm.R
 \docType{package}
 \name{margins}
-\alias{-package}
 \alias{margins}
 \alias{margins-package}
 \alias{margins.betareg}
